@@ -1,21 +1,32 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
-import heroImg from './assets/hero.png';
 import './App.css';
 import Counter from './Counter';
+import TodoList from './TodoList';
+import CharacterCounter from './CharacterCounter';
+import Login from './Login';
+import Register from './Register';
+import { Route, BrowserRouter, Routes } from "react-router-dom"; 
 
 function App() {
-  // Sadece bu satır kalmalı, düz "const count = 0" satırını sildik.
   const [count, setCount] = useState(24);
 
   return (
-    <div>
-      <h1>{count}</h1>
-      {/* Doğru kumanda kullanımı (setCount) */}
-      <button onClick={() => setCount(count + 1)}>Artır</button>
-      <Counter />
-    </div>
+    // DÜZELTME: BrowserRouter'ı en dışa aldık, böylece içindeki her şeyi koruma altına aldı!
+    <BrowserRouter>
+      <div>
+        <h1>{count}</h1>
+        <button onClick={() => setCount(count + 1)}>Artır</button>
+        <Counter />
+        <TodoList />
+        <CharacterCounter />
+        
+        <hr style={{ margin: "40px 0", borderColor: "#ccc" }} />
+        <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
